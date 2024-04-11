@@ -11,7 +11,6 @@ const editDate = document.getElementById("editdate");
 const updateBtn = document.getElementById("update-task");
 
 var now = new Date();
-
 var year = now.getFullYear();
 var month = (now.getMonth() + 1).toString().padStart(2, "0");
 var day = now.getDate().toString().padStart(2, "0");
@@ -127,7 +126,6 @@ let getData = (item = null) => {
         if (item) {
             // console.log(item, "item");
             for (let i = 0; i < data.length; i++) {
-                // console.log(data[i], "name");
                 if (data[i].task === item.task && data[i].date === item.date) {
                     return data[item];
                 }
@@ -172,7 +170,6 @@ let removeData = (itemId) => {
 var modal = document.getElementById("editModal");
 
 let id;
-
 function openModal(index) {
     editDate.setAttribute("min", formattedDateTime);
     modal.style.display = "block";
@@ -202,7 +199,6 @@ updateBtn.addEventListener("click", (e) => {
         data[id].date = editDate.value;
         console.log(editTask.value);
         console.log(getData(data));
-
         if (getData(data[id]) != false) {
             alert("user already added in list");
         } else {
