@@ -4,13 +4,14 @@ const task = document.querySelector("#task-field");
 const date = document.querySelector("#date-field");
 const errorMsg = document.getElementById("errorname");
 const erroredit = document.getElementById("errormodal");
-var modal = document.getElementById("myModal");
+const modal = document.getElementById("editModal");
 var span = document.getElementsByClassName("close")[0];
 const editTask = document.getElementById("edittask");
 const editDate = document.getElementById("editdate");
 const updateBtn = document.getElementById("update-task");
 
 var now = new Date();
+
 var year = now.getFullYear();
 var month = (now.getMonth() + 1).toString().padStart(2, "0");
 var day = now.getDate().toString().padStart(2, "0");
@@ -78,11 +79,11 @@ let listTodo = () => {
                   value.date < formattedDateTime
                 ? "red"
                 : "yellow";
-            html += ` <tr id="a${index}" style="background-color: ${rowColor}">
+            html += ` <tr >
             <td>${index + 1}</td>
             <td>${value.task}</td>
             <td>${value.date}</td>
-            <td><input class="task-checkbox" type="checkbox" id="checkbox${index}" value="${
+            <td id="a${index}" style="background-color: ${rowColor}"><input class="task-checkbox" type="checkbox" id="checkbox${index}" value="${
                 value.task
             }" onclick="complete('${index}','${value.date}')" ${
                 value.completed ? "checked" : ""
@@ -126,6 +127,7 @@ let getData = (item = null) => {
         if (item) {
             // console.log(item, "item");
             for (let i = 0; i < data.length; i++) {
+                // console.log(data[i], "name");
                 if (data[i].task === item.task && data[i].date === item.date) {
                     return data[item];
                 }
@@ -149,6 +151,7 @@ let setData = (item) => {
         data.push(item);
         data = JSON.stringify(data);
         localStorage.setItem("save", data);
+        document.getElementById("task-form").reset();
     }
 };
 
@@ -167,9 +170,8 @@ let removeData = (itemId) => {
     }
 };
 
-var modal = document.getElementById("editModal");
-
 let id;
+
 function openModal(index) {
     editDate.setAttribute("min", formattedDateTime);
     modal.style.display = "block";
@@ -189,19 +191,28 @@ window.onclick = function (event) {
     }
 };
 
+document.addEventListener("DOMContentLoaded", function () {
+    console.log("DOM loaded");
+    console.log("Modal:", modal);
+});
+
 updateBtn.addEventListener("click", (e) => {
     e.preventDefault();
     const data = JSON.parse(localStorage.getItem("save"));
-    if (editTask.value) {
+
+    // Check if the task field is not empty
+    if (editTask.value.trim() !== "") {
         setDefault();
-        // setData(output);
+
+        // Update the task details
         data[id].task = editTask.value;
         data[id].date = editDate.value;
-        console.log(editTask.value);
-        console.log(getData(data));
-        if (getData(data[id]) != false) {
-            alert("user already added in list");
+
+        // Check if the updated task already exists
+        if (getData(data[id]) !== false) {
+            alert("This task already exists in the list.");
         } else {
+            // Save the updated data to localStorage
             localStorage.setItem("save", JSON.stringify(data));
             closeModal();
             listTodo();

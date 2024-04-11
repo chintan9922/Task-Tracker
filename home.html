@@ -18,7 +18,116 @@
                         id="task-field"
                         class="task-form-field"
                         placeholder="Task"
-                        required />
+                        required /><!DOCTYPE html>
+                    <html lang="en">
+                        <head>
+                            <meta charset="UTF-8" />
+                            <meta
+                                name="viewport"
+                                content="width=device-width, initial-scale=1.0" />
+                            <title>Task Tracker</title>
+                            <link rel="stylesheet" href="style.css" />
+                        </head>
+                        <body>
+                            <main id="main-view">
+                                <div id="field">
+                                    <form id="task-form">
+                                        <label for="task">Task:</label>
+                                        <input
+                                            type="text"
+                                            name="task"
+                                            id="task-field"
+                                            class="task-form-field"
+                                            placeholder="Task"
+                                            required />
+                                        <label
+                                            style="margin-left: 10px"
+                                            for="time"
+                                            >Date:</label
+                                        >
+                                        <input
+                                            type="date"
+                                            name="date"
+                                            id="date-field"
+                                            class="task-form-field"
+                                            required />
+                                    </form>
+                                </div>
+                                <div id="span-view">
+                                    <span
+                                        id="errorname"
+                                        style="display: none; font-size: large"
+                                        >Please enter the task name!!</span
+                                    >
+                                </div>
+                                <div id="bttn">
+                                    <input
+                                        type="button"
+                                        value="Add Task"
+                                        id="add-task" />
+                                </div>
+
+                                <div id="border-line">
+                                    <hr />
+                                </div>
+                                <div id="table-view"></div>
+                                <!-- <div id="border-line">
+                                        <hr />
+                                    </div> -->
+                                <!-- <div style="background-color: aqua;" id="result"></div> -->
+                                <div id="editModal" class="modal">
+                                    <div class="modal-content">
+                                        <span
+                                            class="close"
+                                            onclick="closeModal()"
+                                            >&times;</span
+                                        >
+                                        <h2>Edit Task</h2>
+                                        <form id="editForm">
+                                            <label for="task">Task:</label>
+                                            <input
+                                                type="text"
+                                                name="task"
+                                                id="edittask"
+                                                placeholder="Task"
+                                                required />
+                                            <label
+                                                style="margin-left: 10px"
+                                                for="time"
+                                                >Date:</label
+                                            >
+                                            <input
+                                                type="date"
+                                                name="date"
+                                                id="editdate"
+                                                required />
+                                            <button
+                                                id="update-task"
+                                                type="submit">
+                                                Update</button
+                                            ><br />
+                                            <div id="span-view">
+                                                <span
+                                                    id="errormodal"
+                                                    style="
+                                                        display: none;
+                                                        font-size: large;
+                                                    "
+                                                    >Please enter the task
+                                                    name!!</span
+                                                >
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </main>
+                            <script
+                                async
+                                src="./functionality.js"
+                                defer></script>
+                        </body>
+                    </html>
+
                     <label style="margin-left: 10px" for="time">Date:</label>
                     <input
                         type="date"
@@ -60,11 +169,7 @@
                         <label style="margin-left: 10px" for="time"
                             >Date:</label
                         >
-                        <input
-                            type="date"
-                            name="date"
-                            id="editdate"
-                            required />
+                        <input type="date" name="date" id="editdate" required />
                         <button id="add-task" type="submit">Update</button
                         ><br />
                         <div id="span-view">
