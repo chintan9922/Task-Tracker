@@ -373,7 +373,7 @@ function count() {
         },
     });
 }
-count();
+JSON.parse(localStorage.getItem("save")).length > 0 ? count() : null
 
 function collapse() {
     if (topView.style.display === "flex") {
