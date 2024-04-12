@@ -12,36 +12,89 @@ body {
     align-items: center;
     background-color: #3a3a3a;
 }
-
+.form-line label {
+    width: 100px;
+    display: inline-block;
+}
 #main-view {
     overflow-y: auto;
-    width: 75%;
-    height: 75%;
+    width: 85%;
+    height: 90%;
     justify-items: center;
     background-color: white;
     border-radius: 7px;
     box-shadow: 0px 0px 5px 2px black;
 }
 
-#field {
+#title {
     display: grid;
-    justify-items: center;
-    margin-top: 25px;
+    justify-content: center;
     align-items: center;
+    margin-top: 10px;
+}
+
+#image {
+    height: 40px;
+    background-color: white;
+}
+#field {
+    /* display: grid; */
+    width: 60%;
+    justify-items: center;
+    margin-top: 10px;
+    align-items: center;
+}
+
+#task-form {
+    margin-left: 10px;
+}
+
+#date-field {
+    margin-left: 55px;
+}
+#task-field {
+    margin-left: 55px;
+    width: 60%;
+}
+
+#editdate {
+    margin-left: 55px;
+}
+#edittask {
+    margin-left: 55px;
+    width: 50%;
+}
+#editdescription {
+    margin-left: 10px;
+    width: 50%;
+    border-radius: 5px;
+}
+
+#editdescription-container,
+#editdate-container,
+#edittext-container {
+    margin-top: 20px;
+}
+
+#description {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+}
+
+#description-field {
+    margin-left: 10px;
+    width: 60%;
 }
 
 #span-view {
-    display: grid;
-    justify-items: center;
-    margin-top: 25px;
-    align-items: center;
+    /* display: grid;
+    justify-items: center; */
+    margin-left: 150px;
 }
-
 #bttn {
-    display: grid;
-    justify-items: center;
-    margin-top: 25px;
-    align-items: center;
+    margin-top: 10px;
 }
 
 .task-form-field {
@@ -49,11 +102,25 @@ body {
     border-radius: 5px;
 }
 
-#add-task {
-    height: 30px;
+#description-field {
     border-radius: 5px;
+    border: 2px solid;
+}
 
-    margin-left: 10px;
+#update-task {
+    height: 50px;
+    width: 150px;
+    border-radius: 5px;
+    margin-left: 400px;
+    margin-top: 20px;
+    font-size: 15px;
+}
+#add-task {
+    height: 50px;
+    width: 150px;
+    border-radius: 5px;
+    margin-left: 250px;
+    font-size: 20px;
 }
 
 #border-line {
@@ -74,15 +141,29 @@ table {
     width: 90%;
     align-items: center;
 }
-#number,
+
+#number {
+    width: 5%;
+    cursor: ns-resize;
+}
+#date {
+    width: 12%;
+    cursor: ns-resize;
+}
+#des {
+    width: 10%;
+}
+
 #cbox,
 #edit,
 #delete {
-    width: 10%;
+    width: 7%;
 }
-#task,
-#date {
-    width: 25%;
+
+#cbox,
+#task {
+    cursor: ns-resize;
+    /* width: 30%; */
 }
 th,
 td {
@@ -133,3 +214,25 @@ tr {
     text-decoration: none;
     cursor: pointer;
 }
+
+/* .tooltip {
+    position: relative;
+    display: inline-block;
+}
+
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 200px;
+    background-color: #fff;
+    color: #2b2b2b;
+    text-align: center;
+    border-radius: 6px;
+    margin-left: 10px;
+    /* Position the tooltip */
+/* position: absolute; */
+/* z-index: 1; */
+/* } */
+
+/* .tooltip:hover .tooltiptext { */
+/* visibility: visible; */
+/* } */

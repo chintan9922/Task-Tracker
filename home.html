@@ -5,61 +5,148 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Task Tracker</title>
         <link rel="stylesheet" href="style.css" />
+        <link
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+            rel="stylesheet" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
     </head>
     <body>
         <main id="main-view">
-            <div id="field">
-                <form id="task-form">
-                    <label for="task">Task:</label>
-                    <input
-                        type="text"
-                        name="task"
-                        id="task-field"
-                        class="task-form-field"
-                        placeholder="Task"
-                        required />
-                    <label style="margin-left: 10px" for="time">Date:</label>
-                    <input
-                        type="date"
-                        name="date"
-                        id="date-field"
-                        class="task-form-field"
-                        required />
-                </form>
+            <div id="title">
+                <div
+                    style="
+                        font-family: Copperplate, Papyrus, fantasy;
+                        display: flex;
+                        align-items: center;
+                        height: 50px;
+                    ">
+                    <img
+                        id="image"
+                        src="https://static.thenounproject.com/png/887219-200.png" />
+                    <h1 style="margin-left: 10px">Task Management</h1>
+                </div>
             </div>
-            <div id="span-view">
-                <span id="errorname" style="display: none; font-size: large"
-                    >Please enter the task name!!</span
-                >
-            </div>
-            <div id="bttn">
-                <input type="button" value="Add Task" id="add-task" />
+            <div
+                id="top-view"
+                style="display: flex; align-items: center; width: 100%; margin-top: 20px;">
+                <div id="field">
+                    <form id="task-form">
+                        <div
+                            id="date-container"
+                            style="display: flex; align-items: center">
+                            <label for="time">Date:</label>
+                            <input
+                                type="date"
+                                name="date"
+                                id="date-field"
+                                class="task-form-field"
+                                required />
+                        </div>
+                        <div
+                            id="text-container"
+                            style="
+                                display: flex;
+                                align-items: center;
+                                margin-top: 20px;
+                            ">
+                            <label for="task">Task:</label>
+                            <input
+                                type="text"
+                                name="task"
+                                id="task-field"
+                                class="task-form-field"
+                                placeholder="Enter the task"
+                                title="Enter the task!!!"
+                                required />
+                        </div>
+                        <div id="span-view">
+                            <span
+                                id="errorTask"
+                                style="display: none; font-size: large"
+                                >Please enter the task name!!</span
+                            >
+                        </div>
+                        <div
+                            id="description"
+                            style="display: flex; align-items: center">
+                            <label for="description">Description:</label>
+                            <!-- <input
+                                type="text"
+                                name="description"
+                                id="description-field"
+                                class="task-form-field"
+                                placeholder="Enter task description"
+                                required /> -->
+                            <textarea
+                                name="description"
+                                id="description-field"
+                                title="Enter the description!!!"
+                                placeholder="Enter the description"
+                                cols="40"
+                                rows="5"
+                                required></textarea>
+                        </div>
+                        <div id="span-view" style="margin-top: 10px">
+                            <span
+                                id="errorDescription"
+                                style="display: none; font-size: large"
+                                >Please enter the task description!!</span
+                            >
+                        </div>
+                    </form>
+                    <div id="bttn">
+                        <input type="button" value="Submit" id="add-task" />
+                    </div>
+                </div>
+                <div id="chart">
+                    <canvas
+                        id="myChart"
+                        style="width: 100%; max-width: 600px"></canvas>
+                </div>
             </div>
 
             <div id="border-line">
                 <hr />
+            </div>
+            <div id="collapse" style="float: right; margin-right: 10px">
+                <button id="collapseBtt" onclick="collapse()">Collapse</button>
             </div>
             <div id="table-view"></div>
             <!-- <div id="border-line">
                 <hr />
             </div> -->
             <!-- <div style="background-color: aqua;" id="result"></div> -->
+            <div id="descriptionModal" class="modal">
+                <div class="modal-content">
+                    <span class="close" onclick="closeModal()">&times;</span>
+                    <h3 id="displayDes"></h3>
+                </div>
+            </div>
             <div id="editModal" class="modal">
                 <div class="modal-content">
                     <span class="close" onclick="closeModal()">&times;</span>
                     <h2>Edit Task</h2>
-                    <form id="editForm">
-                        <label for="task">Task:</label>
+                    <!-- <form id="editForm">
+                        <label for="time">Date:</label>
+                        <input type="date" name="date" id="editdate" required />
+                        <label style="margin-left: 10px" for="task"
+                            >Task:</label
+                        >
                         <input
                             type="text"
                             name="task"
                             id="edittask"
                             placeholder="Task"
                             required />
-                        <label style="margin-left: 10px" for="time"
-                            >Date:</label
+                        <label style="margin-left: 10px" for="task"
+                            >Description:</label
                         >
-                        <input type="date" name="date" id="editdate" required />
+                        <input
+                            type="text"
+                            name="description"
+                            id="editDescription"
+                            placeholder="Description"
+                            required />
                         <button id="update-task" type="submit">Update</button
                         ><br />
                         <div id="span-view">
@@ -69,10 +156,65 @@
                                 >Please enter the task name!!</span
                             >
                         </div>
+                    </form> -->
+                    <form id="editForm">
+                        <div
+                            id="editdate-container"
+                            style="display: flex; align-items: center">
+                            <label for="time">Date:</label>
+                            <input
+                                type="date"
+                                name="date"
+                                id="editdate"
+                                required />
+                        </div>
+                        <div
+                            id="edittext-container"
+                            style="display: flex; align-items: center">
+                            <label for="task">Task:</label>
+                            <input
+                                type="text"
+                                name="task"
+                                id="edittask"
+                                placeholder="Enter the task"
+                                required />
+                        </div>
+                        <div id="span-view">
+                            <span
+                                id="errorTaskModal"
+                                style="display: none; font-size: large"
+                                >Please enter the task name!!</span
+                            >
+                        </div>
+                        <div
+                            id="editdescription-container"
+                            style="display: flex; align-items: center">
+                            <label for="description">Description:</label>
+                            <!-- <input
+                                type="text"
+                                name="description"
+                                id="description-field"
+                                class="task-form-field"
+                                placeholder="Enter task description"
+                                required /> -->
+                            <textarea
+                                name="description"
+                                id="editdescription"
+                                cols="40"
+                                rows="5"></textarea>
+                        </div>
+                        <div id="span-view">
+                            <span
+                                id="errorDescriptionModal"
+                                style="display: none; font-size: large"
+                                >Please enter the task description!!</span
+                            >
+                        </div>
+                        <button id="update-task" type="submit">Update</button>
                     </form>
                 </div>
             </div>
         </main>
-        <script async src="functionality.js" defer></script>
+        <script async src="./functionality.js" defer></script>
     </body>
 </html>
