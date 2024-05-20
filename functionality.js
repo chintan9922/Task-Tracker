@@ -373,7 +373,7 @@ function count() {
         },
     });
 }
-JSON.parse(localStorage.getItem("save")).length > 0 ? count() : null
+JSON.parse(localStorage.getItem("save")).length > 0 ? count() : null;
 
 function collapse() {
     if (topView.style.display === "flex") {
@@ -461,13 +461,13 @@ let checkClicked = false;
 function sortCheck() {
     let data = JSON.parse(localStorage.getItem("save"));
     if (checkClicked) {
-        data.sort((a,b) => b.completed - a.completed)
+        data.sort((a, b) => b.completed - a.completed);
         data = JSON.stringify(data);
         localStorage.setItem("save", data);
         listTodo();
         checkClicked = false;
     } else {
-        data.sort((a,b) => a.completed - b.completed)
+        data.sort((a, b) => a.completed - b.completed);
         data = JSON.stringify(data);
         localStorage.setItem("save", data);
         listTodo();
